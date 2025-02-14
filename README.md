@@ -46,6 +46,8 @@
 
 ### Edit FLAC_DIRECTORY the variable in playlist_gen.py to meet your needs.
 
+### Adjust the line ```def fetch_top_tracks(self, artist_id, country="UK"):``` to country="US" if appropriate or your country in spotify_client.py.
+
 # To run:
 
 ```python playlist_gen.py```
