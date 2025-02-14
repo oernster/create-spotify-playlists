@@ -164,14 +164,16 @@ def main():
 
     genre_dict = music_service.process_artists(artist_processor)
 
+    # Dictionary to keep track of the number of playlists created for each genre
+    genre_playlist_count = {}
+    unknown_genre_count = 1  # Counter for unknown genre playlists
+
     # Create playlists for genres and artists
     for genre, artists in genre_dict.items():
         all_new_artists = list(set(artists))  # Remove duplicates
 
         # Shuffle the artists within the genre
         random.shuffle(all_new_artists)
-        logging.info(Fore.GREEN + Back.LIGHTBLUE_EX + f"Shuffled all tracks for genre playlists." + Style.RESET_ALL)
-
 
         track_batches = []
         current_batch = []
@@ -190,9 +192,25 @@ def main():
         if current_batch:
             track_batches.append(current_batch)
 
-        # Shuffle and create the playlists
+        # Sort the genres alphabetically before creating playlists, and handle unknown genres
+        if genre == "Unknown Genre":
+            genre_name = f"Playlist {unknown_genre_count}"
+            unknown_genre_count += 1
+        else:
+            genre_name = genre[0] if isinstance(genre, tuple) else genre  # Handle case where genre is a tuple
+            genre_name = sorted([genre_name])[0]  # Sort the genre if necessary
+
+        # Create the playlists
         for index, batch in enumerate(track_batches, start=1):
-            playlist_name = f"{genre[0].capitalize()} {index}" if genre != ("No genres found",) else f"Playlist {index}"
+            # Increment the playlist number for each genre
+            if genre_name not in genre_playlist_count:
+                genre_playlist_count[genre_name] = 1  # Initialize the count for this genre
+            else:
+                genre_playlist_count[genre_name] += 1  # Increment the count for this genre
+
+            # Create playlist name with the correct incremented number
+            playlist_name = f"{genre_name} {genre_playlist_count[genre_name]}"
+
             playlist_manager.create_playlist(playlist_name, batch)
 
 
