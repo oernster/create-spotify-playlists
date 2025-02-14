@@ -1,4 +1,4 @@
-# create-spotify-playlists
+# create-spotify-playlists v1.0
 # Create spotify playlists from local music sources
 
 ## What does it do?
