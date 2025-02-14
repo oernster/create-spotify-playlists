@@ -6,7 +6,7 @@
 ## It retrieves your local music from the paramater FLAC_DIRECTORY = "L:\\Storage\\FLACMusic" (my location).
 ## This assumes you have ripped all your CDs to FLAC or whatever e.g. mp3 and all the directories inside that directory are labelled by artist name.
 ## It then interrogates the musicbrainz API to retrieve artists with a best match of artist name and retrieves the genre and related artists as lists.
-## It then uses the Spotify API to create numbered playlists based on genres from the artists after shuffling them and these will appear in your Spotify App.
+## It then uses the Spotify API to create numbered playlists based on genres from the artists after shuffling them (their top tracks) and these will appear in your Spotify App.
 ### If you bork the run, then I have written a script to delete ALL playlists which is located in the utils directory amongst other utilities.
 ### However, bear in mind that this will ALSO DELETE any existing playlists you have in Spotify so use with ***CAUTION*** or craft the delete script to your liking. 
 
